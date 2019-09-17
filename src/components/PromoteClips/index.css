@@ -1,0 +1,64 @@
+.promoteclips__main {
+    width: auto;
+    height: auto;
+    padding: 40px;
+}
+
+.promoteclips__title {
+    width: 100%;
+    height: 30px;
+    color: #ccc;
+    font-size: 13.5px;
+    user-select: none;
+}
+
+.promoteclips__addClip {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pc__addClip__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 300px;
+    height: 150px;
+    background: #332a49;
+    box-shadow: 0 0 1px #332a49;
+    border-radius: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.pc__addClip__block:hover {
+    box-shadow: 0 0 2px #372e50;
+    background: #372e50;
+}
+
+.pc__addClip__block > i, .pc__addClip__block > span {
+    align-self: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 13.5px;
+    user-select: none;
+}
+
+.promoteclips__clips {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.promoteclips__full {
+    width: 280px;
+    opacity: 0;
+    height: 0px;
+    padding: 0;
+    overflow: hidden;
+}

@@ -1,0 +1,211 @@
+.header {
+  height: 50px;
+  width: 100%;
+  background-color: #4b367c;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.header__nav {
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__logo {
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../assign/logo.png');
+  background-size: contain; 
+  margin-left: 30px;
+}
+
+.header__promote, .header__myclips, .header__mainpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  height: 50px;
+  text-decoration: none;
+}
+
+.header__promote > span, .header__myclips > span, .header__mainpage > span {
+  align-self: center;
+  font-size: 12.5px;
+  color: rgb(183, 163, 219);
+  font-family: 'Roboto', sans-serif;
+  transition: 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.header__promote:hover > span, .header__myclips:hover > span {
+  color: #dbd9e0;
+}
+
+.header__userBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+  width: 400px;
+  text-align: center;
+}
+
+
+.header__userLogin {
+  -ms-flex-item-align: center;
+      align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: center;
+  height: 100%;
+  width: auto;
+  text-decoration: none;
+  color: #fff;
+  margin-right: 20px;
+  cursor: pointer;
+}
+  
+.header__userLogin > span {
+  -ms-flex-item-align: center;
+      align-self: center;
+  margin-right: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.header__userAvatar {
+  width: 30px;
+  height: 30px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  background-size: cover;
+  border-radius: 5px;
+  user-select: none;
+}
+
+.header__userAvatar > img{
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+} 
+
+.logout__block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
+  height: 0;
+  top: 50px;
+  right: 20px;
+  position: absolute;
+  opacity: 0;
+  background: #0f0e11;
+  text-decoration: none;
+  z-index: -1;
+  border: 1px solid #4b367c;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.logout__block:hover {
+  background: rgb(75, 54, 124);
+}
+
+.logout__button {
+  -ms-flex-item-align: center;
+      align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.logout__button > span {
+  font-size: 13.5px;
+  color: #fff;
+}
+
+.header__usernoLogin{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+}
+
+.header__buttonLogin{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 200px;
+  height: 30px;
+  margin-right: 30px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 13.5px;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #4b367c;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.header__buttonLogin:hover{
+  background: #5b4296;
+}

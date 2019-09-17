@@ -1,0 +1,426 @@
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0.5px solid #555555;
+}
+
+.menu__block {
+    height: 100%;
+    width: 240px;
+    background: #29223a;
+    border-right: 1px solid hsla(0, 0%, 100%, .05);
+    color: #fff;
+    margin-top: 50px;
+    position: fixed;
+}
+
+.menu__addStreamer {
+    width: 100%;
+    height: 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-bottom: 10px;
+}
+
+.menu__title {
+    height: 40px;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding-bottom: 10px;
+    color: rgb(183, 163, 219);
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    margin-left: 20px;
+}
+
+.menu__title > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    font-size: 13.5px;
+}
+
+.menu__addStreamer__controls{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    padding-left: 20px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.error {
+    -webkit-animation: error 500ms linear;
+            animation: error 500ms linear;
+}
+
+@-webkit-keyframes error {
+    0% { -webkit-box-shadow: 0 0 0px rgb(140, 0, 255); box-shadow: 0 0 0px rgb(140, 0, 255); }
+    50% {-webkit-box-shadow: 0 0 10px rgb(140, 0, 255);box-shadow: 0 0 10px rgb(140, 0, 255); }
+    100% { -webkit-box-shadow: 0 0 0px rgb(140, 0, 255); box-shadow: 0 0 0px rgb(140, 0, 255); }
+  }
+
+@keyframes error {
+    0% { -webkit-box-shadow: 0 0 0px rgb(140, 0, 255); box-shadow: 0 0 0px rgb(140, 0, 255); }
+    50% {-webkit-box-shadow: 0 0 10px rgb(140, 0, 255);box-shadow: 0 0 10px rgb(140, 0, 255); }
+    100% { -webkit-box-shadow: 0 0 0px rgb(140, 0, 255); box-shadow: 0 0 0px rgb(140, 0, 255); }
+  }
+
+  .success {
+    -webkit-animation: success 500ms linear;
+            animation: success 500ms linear;
+}
+
+@-webkit-keyframes success {
+    0% { -webkit-box-shadow: 0 0 0px rgb(7, 187, 163); box-shadow: 0 0 0px rgb(7, 187, 163); }
+    50% {-webkit-box-shadow: 0 0 10px rgb(7, 187, 163);box-shadow: 0 0 10px rgb(7, 187, 163); }
+    100% { -webkit-box-shadow: 0 0 0px rgb(7, 187, 163); box-shadow: 0 0 0px rgb(7, 187, 163); }
+  }
+
+@keyframes success {
+    0% { -webkit-box-shadow: 0 0 0px rgb(7, 187, 163); box-shadow: 0 0 0px rgb(7, 187, 163); }
+    50% {-webkit-box-shadow: 0 0 10px rgb(7, 187, 163);box-shadow: 0 0 10px rgb(7, 187, 163); }
+    100% { -webkit-box-shadow: 0 0 0px rgb(7, 187, 163); box-shadow: 0 0 0px rgb(7, 187, 163); }
+  }
+
+
+.menu__addStreamer__input{
+    width: 120px;
+    height: 24px;
+    border: 0;
+    padding-left: 10px;
+    background: #1f1a29;
+    border: 1px solid #737275;
+    color: rgb(183, 163, 219);
+    outline: none;
+    font-size: 12px;
+}
+
+.menu__addStreamer__button {
+    width: 100px;
+    height: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    color: rgb(183, 163, 219);
+    cursor: pointer;
+    -webkit-transition: .2s;
+    transition: .2s;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.menu__addStreamer__button > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    font-size: 13.5px;
+}
+
+.menu__clearAll {
+    width: 100%;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.menu__clearAll__button {
+    width: 200px;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-transition: .2s;
+    transition: .2s;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.menu__clearAll__button > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    color: rgb(183, 163, 219);
+    font-size: 13.5px;
+}
+
+
+
+
+.menu__settings {
+    width: 100%;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.menu__settings > hr {
+    display: none;
+    width: 100%;
+}
+
+.menu__setting__bloch > hr {
+    display: none;
+}
+
+
+.menu__setting__button {
+    width: 200px;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-transition: .2s;
+    transition: .2s;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.menu__setting__button > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    color: rgb(183, 163, 219);
+    font-size: 13.5px;
+}
+
+.menu__setting__block {
+    width: 100%;
+    height: 240.5px;
+    display: none;
+    opacity: 1;
+    z-index: 1;
+}
+
+.menu__settings__period {
+    width: 100%;
+    height: 140px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.menu__settings__period__day, .menu__settings__period__weak, .menu__settings__period__month, .menu__settings__period__all {
+    width: 200px;
+    height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-transition: .2s;
+    transition: .2s;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.menu__settings__period__day > span, .menu__settings__period__weak > span, .menu__settings__period__month > span, .menu__settings__period__all > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    color: rgb(183, 163, 219);
+    font-size: 13.5px;
+}
+
+.menu__settings__count_title {
+    width: 100%;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.menu__settings__count_title > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    color: rgb(183, 163, 219);
+    font-size: 13.5px;
+    user-select: none;
+}
+
+.menu__settings__count {
+    width: 100%;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-bottom: 10px;
+}
+
+.menu__settings__count__input{
+    width: 120px;
+    height: 24px;
+    border: 0;
+    padding-left: 10px;
+    background: #1f1a29;
+    border: 1px solid #737275;
+    color: rgb(183, 163, 219);
+    outline: none;
+    font-size: 12px;
+    margin-left: 20px;
+    user-select: none;
+}
+
+.menu__settings__count__button {
+    width: 100px;
+    height: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    color: rgb(183, 163, 219);
+    cursor: pointer;
+    -webkit-transition: .2s;
+    transition: .2s;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.menu__settings__count__button > span {
+    -ms-flex-item-align: center;
+        align-self: center;
+    font-size: 13.5px;
+}
+
+
+
+
+
+.menu__userStreamers {
+    overflow-y: auto;
+}
+
+.menu__userStreamers::-webkit-scrollbar {
+    margin-top: 40px;
+    width: 7px;
+    border-radius: 10px;
+  }
+  
+  .menu__userStreamers::-webkit-scrollbar-track {
+    background: #19171c;
+  }
+  
+  .menu__userStreamers::-webkit-scrollbar-thumb {
+    background-color: #4b367c; 
+    border-radius: 10px;
+  }
+  
+  .menu__userStreamers::-webkit-scrollbar-thumb:hover {
+    background-color: #5b4296;
+  }
+
+.menu__userStreamersBlock {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+.menu__userStreamersBlock__streamer, 
+.menu__userStreamersBlock__delete {
+    cursor: pointer;
+}
+
+.menu__userStreamersBlock__streamer > span {
+    font-size: 13.5px;
+    color: rgb(183, 163, 219);
+    user-select: none;
+}
+
+.menu__userStreamersBlock__streamer > span:hover, 
+.menu__userStreamersBlock__delete > i:hover, 
+.menu__clearAll__button > span:hover,
+.menu__addStreamer__button > span:hover,
+.menu__setting__button > span:hover,
+.menu__settings__period__day > span:hover, 
+.menu__settings__period__weak > span:hover,
+.menu__settings__period__month > span:hover,
+.menu__settings__period__all > span:hover {
+    color: #dbd9e0;
+}
+
+.menu__userStreamersBlock__delete > i {
+    color: rgb(183, 163, 219);
+}

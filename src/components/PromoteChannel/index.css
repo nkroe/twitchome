@@ -1,0 +1,107 @@
+.promotechannel__block {
+    align-self: center;
+    width: 272px;
+    min-width: 272px;
+    height: 100%;
+    margin-right: 40px;
+    border-radius: 10px;
+}
+
+.promotechannel__cont {
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+
+.promotechannel__stream > div >  iframe {
+    position: absolute;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.promotechannel__stream__link {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.promotechannel__banner {
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.promotechannel__info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    background: #29223a;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.promotechannel__block__info {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 100%;
+    padding-left: 5px;
+}
+
+.promotechannel__avatar, .promotechannel__name {
+    align-self: center;
+}
+
+.promotechannel__avatar {
+    width: 30px;
+    height: 30px;
+    user-select: none;
+}
+
+.promotechannel__avatar > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.promotechannel__name {
+    margin-left: 5px;
+    user-select: none;
+}
+
+.promotechannel__name > a {
+    text-decoration: none;
+    color: #b09bdf;
+    font-size: 12.5px;
+}
+
+.promotechannel__status {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 50%;
+    height: 100%;
+    padding-right: 10px;
+    user-select: none;
+}
+
+.promotechannel__status__s {
+    align-self: center;
+    width: 5px;
+    height: 5px;
+    border-radius: 100px;
+    margin-right: 5px;
+    user-select: none;
+}
+
+.promotechannel__status > span {
+    align-self: center;
+    color: #b09bdf;
+    font-size: 12.5px;
+}
