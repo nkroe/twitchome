@@ -13,18 +13,30 @@ class PromoteChannel extends Component {
     }
 
     componentDidMount() {
-        
-        var authOptions = {
-            method: 'GET',
-            url: `https://api.twitch.tv/kraken/streams/${this.props.channelData.channel_id}`,
-            headers: {
+
+        var _getPromoteOpts = url => {
+            return {
+              method: 'GET',
+              url: url,
+              headers: {
                 'Client-ID': process.env.CLIENT_ID,
                 'Accept': 'application/vnd.twitchtv.v5+json'
-            },
-            json: true
-        }
-        axios(authOptions).then(data => {
-            if (data.data.stream) this.setState({ ...this.state, status: 1 })
+              },
+              json: true
+            }
+          }
+          
+        axios(_getPromoteOpts(`https://api.twitch.tv/kraken/streams/${this.props.channelData.channel_id}`)).then(data => {
+            if (data.data.stream) {
+                this.setState({ ...this.state, status: 1 })
+            } else {
+                axios(_getPromoteOpts(`https://api.twitch.tv/kraken/channels/${this.props.channelData.channel_id}`)).then(_data => {
+                    this.setState({
+                        ...this.state,
+                        banner: _data.data.video_banner
+                    })
+                })
+            }
         });
               
     }
