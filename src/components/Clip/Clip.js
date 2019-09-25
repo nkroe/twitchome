@@ -22,8 +22,11 @@ class Clip extends Component {
    }
 
    getClip(streamers){
-      document.querySelector('.main__wallper').style.height = '0px';
-      document.querySelector('.main__wallper').style.height = '100%';
+      if (document.querySelector('.main__wallper'))
+      {
+         document.querySelector('.main__wallper').style.height = '0px';
+         document.querySelector('.main__wallper').style.height = '100%';
+      }
       var {period} = this.props.period;
       var {limit} = this.props.limit;
       if (streamers.length == 0){

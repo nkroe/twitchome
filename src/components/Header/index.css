@@ -52,7 +52,7 @@
   user-select: none;
 }
 
-.header__promote:hover > span, .header__myclips:hover > span {
+.header__mainpage:hover > span, .header__promote:hover > span, .header__myclips:hover > span {
   color: #dbd9e0;
 }
 

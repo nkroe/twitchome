@@ -6,6 +6,7 @@ import Main from './containers/Main/Main';
 import Start from './containers/Start/Start';
 import NotFound from './containers/NotFound/NotFound'
 import axios from 'axios';
+import { NotifyComponent } from 'react-notification-component';
 import {connect} from 'react-redux';
 
 class App extends Component {
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path="/" exact component={Start} />
             <Route exact component={NotFound} />
           </Switch>
+          <NotifyComponent />
         </div>
       </Router>
     );

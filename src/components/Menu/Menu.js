@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import NProgress from '../../../node_modules/nprogress/nprogress.js';
+import { NotifyHandler } from 'react-notification-component';
+
 import './style.css';
 
 class Menu extends Component {
@@ -17,7 +19,8 @@ class Menu extends Component {
             ready: true,
             secReady: true,
             streamers: [],
-            settings: 0
+            settings: 0,
+            addState: true
         }
     }
 
@@ -40,60 +43,108 @@ class Menu extends Component {
     }
     
     addStreamerError(){
-        document.querySelector('.menu__addStreamer__input').classList.add('error');
-        setTimeout(_=>{document.querySelector('.menu__addStreamer__input').classList.remove('error')}, 500);
+        NProgress.done();
+        NotifyHandler.add(
+            'Error',
+            'Streamer was not found',
+            {
+                time: 1,
+                position: 'RB'
+            },
+            {
+                styleBlock: { boxShadow: '0 0 10px 1px #5433a18f' },
+                mainBackground: '#5433a1d5',
+                mainBackgroundHover: '#5433a1',
+                styleProgress: { background: '#8362cf', boxShadow: '0 0 0 black', height: '5px' }
+            }
+        )
+        setTimeout(() => {
+            this.setState({
+                ...this.state,
+                addState: true
+            })
+        }, 1000)
     }
 
     addStreamerSuccess(){
-        document.querySelector('.menu__addStreamer__input').classList.add('success');
-        setTimeout(_=>{document.querySelector('.menu__addStreamer__input').classList.remove('success')}, 500);
+        NProgress.done();
+        NotifyHandler.add(
+            'Success',
+            'Streamer was successfully added',
+            {
+                time: 1,
+                position: 'RB'
+            },
+            {
+                styleBlock: { boxShadow: '0 0 10px 1px #5433a18f' },
+                mainBackground: '#5433a1d5',
+                mainBackgroundHover: '#5433a1',
+                styleProgress: { background: '#8362cf', boxShadow: '0 0 0 black', height: '5px' }
+            }
+        )
+        setTimeout(() => {
+            this.setState({
+                ...this.state,
+                addState: true
+            })
+        }, 1000)
     }
 
     getChannel = (streamersName) => {
-        NProgress.start();
-        if (/^([a-zA-Z0-9_]{1,})$/.test(streamersName)){
-            var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', `https://api.twitch.tv/kraken/users?login=${streamersName}`);
-            httpRequest.setRequestHeader('Client-ID', process.env.CLIENT_ID);
-            httpRequest.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
-            httpRequest.send();
-            httpRequest.addEventListener('load', _=>{
-                if (JSON.parse(httpRequest.response).status === 400){
-                    this.addStreamerError();
-                    NProgress.done();
-                    return console.log('Ошибка');
-                } else if (JSON.parse(httpRequest.response)._total === 0){
-                    this.addStreamerError();
-                    NProgress.done();
-                    return console.log('Пользователь не найден');
-                } else {
-                    var updateOptions = {
-                        method: 'GET',
-                        url: `${process.env.BACK}/addStreamer/${this.getCookie('accessToken')}/${streamersName}`,
-                        headers: {
-                        'Client-ID': process.env.CLIENT_ID,
-                        'Accept': 'application/vnd.twitchtv.v5+json'
+        if (this.state.addState){
+            NProgress.start();
+            if (/^([a-zA-Z0-9_]{1,})$/.test(streamersName)){
+                this.setState({
+                    ...this.state,
+                    addState: false
+                })
+                var httpRequest = new XMLHttpRequest();
+                httpRequest.open('GET', `https://api.twitch.tv/kraken/users?login=${streamersName}`);
+                httpRequest.setRequestHeader('Client-ID', process.env.CLIENT_ID);
+                httpRequest.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
+                httpRequest.send();
+                httpRequest.addEventListener('load', _=>{
+                    if (JSON.parse(httpRequest.response).status === 400){
+                        this.addStreamerError();
+                        NProgress.done();
+                        return console.log('Ошибка');
+                    } else if (JSON.parse(httpRequest.response)._total === 0){
+                        this.addStreamerError();
+                        NProgress.done();
+                        return console.log('Пользователь не найден');
+                    } else {
+                        var updateOptions = {
+                            method: 'GET',
+                            url: `${process.env.BACK}/addStreamer/${this.getCookie('accessToken')}/${streamersName}`,
+                            headers: {
+                            'Client-ID': process.env.CLIENT_ID,
+                            'Accept': 'application/vnd.twitchtv.v5+json'
+                            }
+                        };
+                        axios(updateOptions).then(_=>'');
+                        var stateStreamers = this.state.streamers;
+                        if (stateStreamers.indexOf(streamersName) === -1){
+                            stateStreamers.push(streamersName)
                         }
-                    };
-                    axios(updateOptions).then(_=>'');
-                    var stateStreamers = this.state.streamers;
-                    if (stateStreamers.indexOf(streamersName) === -1){
-                        stateStreamers.push(streamersName)
+                        this.setState({
+                            streamers: stateStreamers
+                        })
+                        this.soloStreamer(this.state.streamers);
+                        this.addStreamerSuccess();
+                        document.querySelector('.menu__addStreamer__input').value = '';
+                        NProgress.done();
+                        return console.log(JSON.parse(httpRequest.response).users[0].name);
                     }
-                    this.setState({
-                        streamers: stateStreamers
-                    })
-                    this.soloStreamer(this.state.streamers);
-                    this.addStreamerSuccess();
-                    document.querySelector('.menu__addStreamer__input').value = '';
-                    NProgress.done();
-                    return console.log(JSON.parse(httpRequest.response).users[0].name);
-                }
-            });
-        } else {
-            NProgress.done();
-            this.addStreamerError();
-            return console.log('Введены запрещенные символы');
+                });
+            } else {
+                this.setState({
+                    ...this.state,
+                    addState: false
+                })
+                NProgress.done();
+                this.addStreamerError();
+                return console.log('Введены запрещенные символы');
+            }
         }
     }
 
