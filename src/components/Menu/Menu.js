@@ -39,14 +39,14 @@ class Menu extends Component {
                 });
             }
           });
-        document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 192)) + 'px';
+        document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 180)) + 'px';
     }
     
     addStreamerError(){
         NProgress.done();
         NotifyHandler.add(
-            'Error',
-            'Streamer was not found',
+            'Ошибка',
+            'Стример не был найден',
             {
                 time: 1,
                 position: 'RB'
@@ -69,8 +69,8 @@ class Menu extends Component {
     addStreamerSuccess(){
         NProgress.done();
         NotifyHandler.add(
-            'Success',
-            'Streamer was successfully added',
+            'Успешно',
+            'Стример был успешно добавлен',
             {
                 time: 1,
                 position: 'RB'
@@ -107,11 +107,9 @@ class Menu extends Component {
                     if (JSON.parse(httpRequest.response).status === 400){
                         this.addStreamerError();
                         NProgress.done();
-                        return console.log('Ошибка');
                     } else if (JSON.parse(httpRequest.response)._total === 0){
                         this.addStreamerError();
                         NProgress.done();
-                        return console.log('Пользователь не найден');
                     } else {
                         var updateOptions = {
                             method: 'GET',
@@ -127,13 +125,12 @@ class Menu extends Component {
                             stateStreamers.push(streamersName)
                         }
                         this.setState({
-                            streamers: stateStreamers
+                            streamers: stateStreamers.sort()
                         })
                         this.soloStreamer(this.state.streamers);
                         this.addStreamerSuccess();
                         document.querySelector('.menu__addStreamer__input').value = '';
                         NProgress.done();
-                        return console.log(JSON.parse(httpRequest.response).users[0].name);
                     }
                 });
             } else {
@@ -143,7 +140,6 @@ class Menu extends Component {
                 })
                 NProgress.done();
                 this.addStreamerError();
-                return console.log('Введены запрещенные символы');
             }
         }
     }
@@ -272,7 +268,7 @@ class Menu extends Component {
             document.querySelector('.menu__setting__block').style.display = 'block';
             document.querySelector('.menu__settings hr').style.display = 'block';
             document.querySelector('.menu__setting__block hr').style.display = 'block';
-            document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 452)) + 'px';
+            document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 442)) + 'px';
             this.setState({
                 settings: 1
             });
@@ -281,7 +277,7 @@ class Menu extends Component {
             document.querySelector('.menu__setting__block').style.display = 'none';
             document.querySelector('.menu__settings hr').style.display = 'none';
             document.querySelector('.menu__setting__block hr').style.display = 'none';
-            document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 192)) + 'px';
+            document.querySelector('.menu__userStreamers').style.height = (window.innerHeight - (parseFloat(getComputedStyle(document.querySelector('.menu__addStreamer')).height.slice(0,-2)) + parseFloat(getComputedStyle(document.querySelector('.menu__clearAll')).height.slice(0,-2))*2 + 180)) + 'px';
             this.setState({
                 settings: 0
             });

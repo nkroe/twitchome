@@ -4,6 +4,10 @@ hr {
     border: 0.5px solid #555555;
 }
 
+hr:nth-child(8n) {
+    margin-bottom: 2px;
+}
+
 .menu__block {
     height: 100%;
     width: 240px;
@@ -353,11 +357,21 @@ hr {
 }
 
 
-
+/* Scrollbar */
 
 
 .menu__userStreamers {
     overflow-y: auto;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #555555;
+}
+
+.menu__userStreamersBlock:first-child {
+    padding-top: 4px;
+}
+
+.menu__userStreamersBlock:last-child {
+    padding-bottom: 4px;
 }
 
 .menu__userStreamers::-webkit-scrollbar {
@@ -367,7 +381,8 @@ hr {
   }
   
   .menu__userStreamers::-webkit-scrollbar-track {
-    background: #19171c;
+    background: #29223a;
+    margin-bottom: 2px;
   }
   
   .menu__userStreamers::-webkit-scrollbar-thumb {
@@ -378,6 +393,10 @@ hr {
   .menu__userStreamers::-webkit-scrollbar-thumb:hover {
     background-color: #5b4296;
   }
+
+
+/* Scrollbar */
+
 
 .menu__userStreamersBlock {
     display: -webkit-box;
