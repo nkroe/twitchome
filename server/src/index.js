@@ -81,14 +81,15 @@ passport.use('twitch', new OAuth2Strategy({
       login: profile.data[0].login,
       display_name: profile.data[0].display_name,
       image: profile.data[0].profile_image_url,
-      views: profile.data[0].view_count
+      views: profile.data[0].view_count,
+      balance: '0'
   });
   Users.find({ "id": profile.data[0].id }).then((data)=>{
     if (data.length === 0) {
       getUser.save().then(()=> {
         (function updateClient(){
                    var clientServerOptions = {
-                       uri: `https://api.twitch.tv/kraken/users/${profile.data[0].id}/follows/channels?limit=50`,
+                       uri: `https://api.twitch.tv/kraken/users/${profile.data[0].id}/follows/channels?limit=100`,
                        method: 'GET',
                        headers: {
                         'Client-ID': process.env.CLIENT_ID,
@@ -123,7 +124,6 @@ passport.use('twitch', new OAuth2Strategy({
           {
             "accessToken": profile.accessToken,
             "refreshToken": profile.refreshToken,
-            "id": profile.data[0].id,
             "login": profile.data[0].login,
             "display_name": profile.data[0].display_name,
             "image": profile.data[0].profile_image_url,
@@ -192,42 +192,83 @@ app.get('/a/:accessToken', (req, res) =>{
 });
 
 app.get('/addStreamer/:accessToken/:streamer', (req, res) =>{
-  Users.find({ "accessToken": req.params.accessToken}).then((data)=>{
-    var arr = data[0].Streamers;
-    if(arr.indexOf(req.params.streamer) === -1){
-      arr.push(req.params.streamer);
-    }
+  Users.find({ "accessToken": req.params.accessToken }).then((data)=>{
+    if (data.length !== 0) {
+      let arr = data[0].Streamers.concat(req.params.streamer);
       Users.updateOne(
-        { "Streamers" : data[0].Streamers.map },
-        { $set: {"Streamers" : arr } }
-     ).then(addUpdate => res.send('Ok ' + addUpdate)).catch(e => console.log('Add ' + e));
-    }).catch(e => console.log('Find' + e));
+        { 
+          "id" : data[0].id
+        },
+        { 
+          $set: {
+            "Streamers" : arr
+          } 
+        }
+      ).then(dataUpdate => res.send('Ok'))
+       .catch(e => {
+          console.log('Update error: ' + e);
+          res.send('Update error');
+       });
+    }
+  }).catch(e => {
+    console.log('Find error: ' + e);
+    res.send('Find error');
+  });
 });
 
 app.get('/showAll/:accessToken', (req, res) =>{
-  Users.find({ "accessToken": req.params.accessToken}).then((data)=>{
+  Users.find({ "accessToken": req.params.accessToken }).then((data)=>{
       res.send(data[0].Streamers);
     })
 });
 
 app.get('/delete/:accessToken/:streamer', (req, res) =>{
-  Users.find({ "accessToken": req.params.accessToken}).then((data)=>{
-    var arr = data[0].Streamers;
-    arr.splice(arr.indexOf(req.params.streamer),1);
-      Users.updateOne(
-        { "Streamers" : data[0].Streamers.map },
-        { $set: {"Streamers" : arr } }
-     ).then(dataUpdate => res.send('Ok ' + dataUpdate)).catch(e => console.log('Update' + e));
-    }).catch(e => console.log('Find' + e));
+  Users.find({ "accessToken": req.params.accessToken }).then((data)=>{
+      if (data.length !== 0) {
+        let arr = data[0].Streamers.filter(elem => elem !== req.params.streamer);
+        Users.updateOne(
+          { 
+            "id" : data[0].id
+          },
+          { 
+            $set: {
+              "Streamers" : arr
+            } 
+          }
+        ).then(dataUpdate => res.send('Ok'))
+         .catch(e => {
+            console.log('Update error: ' + e);
+            res.send('Update error');
+         });
+      }
+    }).catch(e => {
+      console.log('Find error: ' + e);
+      res.send('Find error');
+    });
   });
 
   app.get('/deleteAll/:accessToken', (req, res) =>{
-    Users.find({ "accessToken": req.params.accessToken}).then((data)=>{
-      Users.updateOne(
-        { "Streamers" : data[0].Streamers },
-        { $set: {"Streamers" : [] } }
-      ).then(dataDelete => res.send('Ok ' + dataDelete)).catch(e => console.log('Delete all' + e));
-    }).catch(e => console.log('Find' + e));
+    Users.find({ "accessToken": req.params.accessToken }).then((data)=>{
+      if (data.length !== 0) {
+        Users.updateOne(
+          { 
+            "id" : data[0].id
+          },
+          { 
+            $set: {
+              "Streamers" : []
+            } 
+          }
+        ).then(dataUpdate => res.send('Ok'))
+         .catch(e => {
+            console.log('Update error: ' + e);
+            res.send('Update error');
+         });
+      }
+    }).catch(e => {
+      console.log('Find error: ' + e);
+      res.send('Find error');
+    });
   });
 
   app.get('/addPromoteChannel/:channel', (req, res) => {

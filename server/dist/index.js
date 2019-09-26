@@ -95,14 +95,15 @@ passport.use('twitch', new OAuth2Strategy({
     login: profile.data[0].login,
     display_name: profile.data[0].display_name,
     image: profile.data[0].profile_image_url,
-    views: profile.data[0].view_count
+    views: profile.data[0].view_count,
+    balance: '0'
   });
   _Users2.default.find({ "id": profile.data[0].id }).then(function (data) {
     if (data.length === 0) {
       getUser.save().then(function () {
         (function updateClient() {
           var clientServerOptions = {
-            uri: 'https://api.twitch.tv/kraken/users/' + profile.data[0].id + '/follows/channels?limit=50',
+            uri: 'https://api.twitch.tv/kraken/users/' + profile.data[0].id + '/follows/channels?limit=100',
             method: 'GET',
             headers: {
               'Client-ID': process.env.CLIENT_ID,
@@ -132,7 +133,6 @@ passport.use('twitch', new OAuth2Strategy({
       }, { $set: {
           "accessToken": profile.accessToken,
           "refreshToken": profile.refreshToken,
-          "id": profile.data[0].id,
           "login": profile.data[0].login,
           "display_name": profile.data[0].display_name,
           "image": profile.data[0].profile_image_url,
@@ -188,17 +188,24 @@ app.get('/a/:accessToken', function (req, res) {
 
 app.get('/addStreamer/:accessToken/:streamer', function (req, res) {
   _Users2.default.find({ "accessToken": req.params.accessToken }).then(function (data) {
-    var arr = data[0].Streamers;
-    if (arr.indexOf(req.params.streamer) === -1) {
-      arr.push(req.params.streamer);
+    if (data.length !== 0) {
+      var arr = data[0].Streamers.concat(req.params.streamer);
+      _Users2.default.updateOne({
+        "id": data[0].id
+      }, {
+        $set: {
+          "Streamers": arr
+        }
+      }).then(function (dataUpdate) {
+        return res.send('Ok');
+      }).catch(function (e) {
+        console.log('Update error: ' + e);
+        res.send('Update error');
+      });
     }
-    _Users2.default.updateOne({ "Streamers": data[0].Streamers.map }, { $set: { "Streamers": arr } }).then(function (addUpdate) {
-      return res.send('Ok ' + addUpdate);
-    }).catch(function (e) {
-      return console.log('Add ' + e);
-    });
   }).catch(function (e) {
-    return console.log('Find' + e);
+    console.log('Find error: ' + e);
+    res.send('Find error');
   });
 });
 
@@ -210,27 +217,48 @@ app.get('/showAll/:accessToken', function (req, res) {
 
 app.get('/delete/:accessToken/:streamer', function (req, res) {
   _Users2.default.find({ "accessToken": req.params.accessToken }).then(function (data) {
-    var arr = data[0].Streamers;
-    arr.splice(arr.indexOf(req.params.streamer), 1);
-    _Users2.default.updateOne({ "Streamers": data[0].Streamers.map }, { $set: { "Streamers": arr } }).then(function (dataUpdate) {
-      return res.send('Ok ' + dataUpdate);
-    }).catch(function (e) {
-      return console.log('Update' + e);
-    });
+    if (data.length !== 0) {
+      var arr = data[0].Streamers.filter(function (elem) {
+        return elem !== req.params.streamer;
+      });
+      _Users2.default.updateOne({
+        "id": data[0].id
+      }, {
+        $set: {
+          "Streamers": arr
+        }
+      }).then(function (dataUpdate) {
+        return res.send('Ok');
+      }).catch(function (e) {
+        console.log('Update error: ' + e);
+        res.send('Update error');
+      });
+    }
   }).catch(function (e) {
-    return console.log('Find' + e);
+    console.log('Find error: ' + e);
+    res.send('Find error');
   });
 });
 
 app.get('/deleteAll/:accessToken', function (req, res) {
   _Users2.default.find({ "accessToken": req.params.accessToken }).then(function (data) {
-    _Users2.default.updateOne({ "Streamers": data[0].Streamers }, { $set: { "Streamers": [] } }).then(function (dataDelete) {
-      return res.send('Ok ' + dataDelete);
-    }).catch(function (e) {
-      return console.log('Delete all' + e);
-    });
+    if (data.length !== 0) {
+      _Users2.default.updateOne({
+        "id": data[0].id
+      }, {
+        $set: {
+          "Streamers": []
+        }
+      }).then(function (dataUpdate) {
+        return res.send('Ok');
+      }).catch(function (e) {
+        console.log('Update error: ' + e);
+        res.send('Update error');
+      });
+    }
   }).catch(function (e) {
-    return console.log('Find' + e);
+    console.log('Find error: ' + e);
+    res.send('Find error');
   });
 });
 

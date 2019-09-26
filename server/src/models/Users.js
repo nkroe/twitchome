@@ -13,6 +13,7 @@ const User = new Schema(
         display_name: String,
         image: String,
         views: String,
+        balance: String
     }
 )
 

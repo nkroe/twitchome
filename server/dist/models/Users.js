@@ -21,7 +21,8 @@ var User = new _mongoose.Schema({
     login: String,
     display_name: String,
     image: String,
-    views: String
+    views: String,
+    balance: String
 });
 
 var Users = _mongoose2.default.model('Users', User);
